@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ana Vieira — Portfólio</title>
+  <meta name="description" content="Portfólio de Ana — Desenvolvedora Front-end Jr. Projetos, skills e contato." />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #6d28d9; /* roxo Decola Juninho vibe */
+      --card: #f9fafb;
+      --glass: rgba(255,255,255,0.6);
+      --radius: 12px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      scroll-behavior: smooth;
+    }
+    [data-theme="dark"]{
+      --bg: #0b1220;
+      --text: #e6eef8;
+      --muted: #9aa4b2;
+      --accent: #8b5cf6;
+      --card: #071126;
+      --glass: rgba(255,255,255,0.04);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:60px;
+    }
+
+    .container{
+      width: min(1100px, 94%);
+      margin: 0 auto;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.35));
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      z-index: 40;
+    }
+    [data-theme="dark"] header{
+      background: linear-gradient(180deg, rgba(7,17,34,0.6), rgba(7,17,34,0.35));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 0;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      font-weight:700;
+    }
+    .brand .dot{
+      width:42px;height:42px;border-radius:10px;display:inline-grid;place-items:center;color:white;font-weight:800;background:var(--accent);
+    }
+    nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0;align-items:center}
+    nav a{
+      text-decoration:none;color:var(--muted);
+      padding:8px 10px;border-radius:8px;font-weight:600;font-size:0.95rem;
+    }
+    nav a:hover{color:var(--text);background:var(--glass)}
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{
+      padding:8px 12px;border-radius:10px;border:0;font-weight:700;cursor:pointer;background:transparent;color:var(--accent);
+    }
+
+    .hamburg{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .menu-toggle{
+      width:40px;height:40px;border-radius:8px;border:0;background:transparent;cursor:pointer;
+      display:grid;place-items:center;font-size:1.2rem;color:var(--muted)
+    }
+    .mobile-nav{
+      display:none;
+      padding:10px 0;
+    }
+
+    .hero{
+      padding:48px 0 28px;
+      display:flex;
+      gap:28px;
+      align-items:center;
+      min-height: 56vh;
+    }
+    .hero-left{flex:1}
+    .hero-title{font-size:clamp(1.6rem,3.6vw,2.4rem);margin:0 0 8px}
+    .hero-sub{color:var(--muted);margin:0 0 18px}
+    .cta-group{display:flex;gap:12px}
+    .primary-cta{
+      background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+    }
+    .secondary-cta{padding:10px 12px;border-radius:10px;border:1px solid var(--glass);background:transparent;color:var(--text)}
+
+    .hero-photo{
+      width:170px;height:170px;border-radius:20px;overflow:hidden;flex-shrink:0;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      display:grid;place-items:center;
+      background:linear-gradient(180deg,var(--card),transparent);
+    }
+    .hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+    section{padding:42px 0}
+    h2.section-title{margin:0 0 18px;font-size:1.2rem;letter-spacing:0.2px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+
+    .projects-grid{
+      display:grid;
+      gap:18px;
+      grid-template-columns: 1fr;
+    }
+    .card{
+      background:var(--card);padding:18px;border-radius:16px;box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      border:1px solid rgba(0,0,0,0.03)
+    }
+    .project-thumb{height:140px;border-radius:10px;background:linear-gradient(90deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02));overflow:hidden;margin-bottom:12px}
+    .project-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .skills-list{display:flex;gap:10px;flex-wrap:wrap}
+    .skill-pill{padding:8px 10px;border-radius:999px;border:1px solid var(--glass);font-weight:600}
+
+    form{display:grid;gap:10px;max-width:620px}
+    input,textarea{
+      padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);
+      background:transparent;color:var(--text);resize:vertical
+    }
+    textarea{min-height:120px}
+    .form-rows{display:grid;gap:10px}
+
+    footer{padding:22px 0;text-align:center;color:var(--muted);font-size:0.95rem}
+
+    @media(min-width:700px){
+      .projects-grid{grid-template-columns: repeat(2, 1fr)}
+      .hero{min-height:48vh}
+    }
+    @media(min-width:1000px){
+      .hero{padding-top:72px}
+      .hero{gap:48px}
+      .hero-photo{width:220px;height:220px;border-radius:18px}
+      .projects-grid{grid-template-columns: repeat(3, 1fr)}
+      nav ul{gap:22px}
+      .mobile-nav{display:none !important}
+    }
+
+    @media(max-width:999px){
+      nav ul{display:none}
+      .menu-toggle{display:inline-grid}
+      .mobile-nav{display:block}
+      .mobile-nav.open nav ul{display:flex;flex-direction:column;gap:8px;padding:8px 0}
+      .hero{flex-direction:column;align-items:flex-start}
+    }
+
+    .muted{color:var(--muted)}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+
+  <header aria-label="Barra de navegação">
+    <div class="container nav-inner">
+      <div class="brand" aria-hidden="true">
+        <div class="dot">A</div>
+        <div>
+          <div style="font-size:.95rem">Ana Vieira</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:2px">Estudante Frontend</div>
+        </div>
+      </div>
+
+      <nav role="navigation" aria-label="Menu principal">
+        <ul>
+          <li><a href="#hero">Início</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="actions">
+        <button class="btn" id="theme-toggle" aria-pressed="false" title="Trocar tema">🌙</button>
+
+        <div class="hamburg">
+          <button class="menu-toggle" id="menu-btn" aria-label="Abrir menu" aria-expanded="false">☰</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mobile-nav" id="mobile-nav" aria-hidden="true">
+      <nav>
+        <ul>
+          <li><a href="#hero">Início</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="maincontent">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <h1 id="hero-title" class="hero-title">Oi! Eu sou a Ana — desenvolvedora front-end em formação.</h1>
+        <p class="hero-sub">Crio interfaces acessíveis e responsivas com os conhecimentos que estou aprendendo diariamente. HTML semântico, SCSS moderno e JavaScript.</p>
+        <div class="cta-group">
+          <a class="primary-cta" href="#projetos">Ver projetos</a>
+          <a class="secondary-cta" href="#meus-contatos">Contato</a>
+        </div>
+
+        <p style="margin-top:16px;color:var(--muted)">Disponível para vagas voluntárias e projetos pequenos. Curiosa por Back-End em Java.</p>
+      </div>
+
+      <div class="hero-photo" aria-hidden="true">
+        <img src="/assets/img/avatar.jpg.jpeg" alt="Avatar de Ana">
+      </div>
+    </section>
+
+    <section id="sobre" aria-labelledby="sobre-title">
+      <h2 id="sobre-title" class="section-title">Sobre</h2>
+      <p class="lead">Sou assistente de suporte técnico, formanda de Análise e Desenvolvimento de Sistemas, em transição para desenvolvimento front-end. Busco aprender boas práticas voltadas para front-end.</p>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px">
+        <div class="card">
+          <h3 style="margin:0 0 8px">O que trago</h3>
+          <ul style="margin:0;padding-left:18px;color:var(--muted)">
+            <li>Organização, atenção a detalhes e vontade de aprender</li>
+            <li>Experiência com atendimento, documentação e trabalho em equipe</li>
+            <li>Noções de Git e VS Code</li>
+            <li>Conhecimento em banco de dados</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos" aria-labelledby="projetos-title">
+      <h2 id="projetos-title" class="section-title">Projetos</h2>
+      <p class="lead">Espaço para atualizar com as evoluções que eu estou estudando no curso de Front-End, atualmente estudando HTML, CSS e JavaScript, ministrado pela Vai na Web com foco em Full Stack. Links não funcionais ainda.</p>
+
+      <div class="projects-grid" style="margin-top:18px">
+        <article class="card" aria-labelledby="p1-title">
+          <div class="project-thumb" role="img" aria-label="Thumb projeto portfólio">
+            <img alt="Screenshot Portfólio" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop">
+          </div>
+          <h3 id="p1-title" style="margin:0 0 6px">Portfólio Pessoal (Mero exemplo)</h3>
+          <p class="muted" style="margin:0 0 12px">Site responsivo com hero, projetos, skills e contato. HTML semântico e CSS com Grid/Flexbox.</p>
+          <div style="display:flex;gap:8px">
+            <a class="btn" href="#" onclick="alert('Link do repositório aqui')">Repositório</a>
+            <a class="btn" href="#projetos">Demo</a>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="p2-title">
+          <div class="project-thumb" role="img" aria-label="Thumb projeto to-do">
+            <img alt="Screenshot To-do" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop">
+          </div>
+          <h3 id="p2-title" style="margin:0 0 6px">To-Do List (Mero exemplo)</h3>
+          <p class="muted" style="margin:0 0 12px">Adicionar, marcar e remover tarefas. Persistência com localStorage.</p>
+          <div style="display:flex;gap:8px">
+            <a class="btn" href="#">Repositório</a>
+            <a class="btn" href="#">Demo</a>
+          </div>
+        </article>
+
+        <article class="card" aria-labelledby="p3-title">
+          <div class="project-thumb" role="img" aria-label="Thumb projeto quiz">
+            <img alt="Screenshot Quiz" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop">
+          </div>
+          <h3 id="p3-title" style="margin:0 0 6px">Quiz Interativo (Mero exemplo)</h3>
+          <p class="muted" style="margin:0 0 12px">Quiz com perguntas e feedback final. Usa JS para lógica de pontuação.</p>
+          <div style="display:flex;gap:8px">
+            <a class="btn" href="#">Repositório</a>
+            <a class="btn" href="#">Demo</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title" class="section-title">Skills</h2>
+      <p class="lead">Ferramentas e tecnologias que eu uso.</p>
+      <div style="margin-top:12px" class="skills-list">
+        <span class="skill-pill">HTML5</span>
+        <span class="skill-pill">CSS3 (Flexbox / Grid)</span>
+        <span class="skill-pill">JavaScript (DOM)</span>
+        <span class="skill-pill">Git & GitHub</span>
+        <span class="skill-pill">VS Code</span>
+      </div>
+    </section>
+
+    <section id="meus-contatos" aria-labelledby="meus-contatos-title">
+        <h2 id="meus-contatos-title" class="section-title">Minhas informações de contato</h2>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/anacvieiras/">@anacvieiras</a></p>
+        <p>Github: <a href="https://github.com/anacvieiraa">@anacvieiraa</a></p>
+        <p>E-mail: ana_akai@live.com</p>
+    </section>
+
+
+    <section id="forms" aria-labelledby="forms-title">
+      <h2 id="forms-title" class="section-title">Formulário - Teste</h2>
+      <p class="lead">Quer conversar? Manda um Olá — eu respondo.</p>
+
+      <form id="contact-form" novalidate>
+        <div class="form-rows">
+          <input id="name" type="text" placeholder="Nome" required aria-required="true" />
+          <input id="email" type="email" placeholder="Email" required aria-required="true" />
+        </div>
+        <textarea id="message" placeholder="Mensagem" required aria-required="true"></textarea>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button type="submit" class="primary-cta">Enviar</button>
+          <div id="form-msg" role="status" aria-live="polite" style="color:var(--muted)"></div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <strong>Ana Vieira</strong> — Frontend em formação • <span class="muted">Disponível para voluntariado</span>
+    </div>
+  </footer>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle.addEventListener('click', function() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+      document.documentElement.removeAttribute('data-theme');
+      themeToggle.textContent = '🌙';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggle.textContent = '☀️';
+    }
+  });
+
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  menuBtn.addEventListener('click', function() {
+    if (mobileNav.style.display === 'block') {
+      mobileNav.style.display = 'none';
+    } else {
+      mobileNav.style.display = 'block';
+    }
+  });
+
+  const mobileLinks = mobileNav.querySelectorAll('a');
+  mobileLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobileNav.style.display = 'none';
+    });
+  });
+
+  const form = document.getElementById('contact-form');
+  const formMsg = document.getElementById('form-msg');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    if (name === '' || email === '' || message === '') {
+      formMsg.style.color = 'crimson';
+      formMsg.textContent = 'Por favor, preencha todos os campos.';
+    } else {
+      formMsg.style.color = 'green';
+      formMsg.textContent = 'Mensagem enviada! (simulação)';
+      form.reset();
+    }
+  });
+</script>
+
+</body>
+</html>
